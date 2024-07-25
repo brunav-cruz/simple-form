@@ -1,6 +1,7 @@
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class FormGenerator {
@@ -15,6 +16,16 @@ public class FormGenerator {
         FormDslListenerImpl listener = new FormDslListenerImpl();
         walker.walk(listener, tree);
 
-        System.out.println(listener.getGeneratedCode());
+        String generatedCode = listener.getGeneratedCode();
+
+        try (FileWriter fileWriter = new FileWriter("form.html")) {
+            fileWriter.write(generatedCode);
+        }
+
+        openHtmlInBrowser("form.html");
+    }
+
+    private static void openHtmlInBrowser(String filePath) throws IOException {
+        java.awt.Desktop.getDesktop().browse(java.nio.file.Paths.get(filePath).toUri());
     }
 }
