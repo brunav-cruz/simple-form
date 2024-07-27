@@ -1,0 +1,14 @@
+Form Cadastro {
+  nome: text,
+  idade: text,
+  endereco: select { option1, option2, option3 }
+}
+
+Button {
+  text: "Enviar",
+  color: "#007BFF"
+}
+
+Title {
+  color: "#007BFF"
+}
